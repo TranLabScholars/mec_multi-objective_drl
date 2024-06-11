@@ -60,7 +60,7 @@ class sdn_net(nn.Module):
                                     mlp_ch=MLP_CH, out_ch=edge_num+cloud_num, block_num=3)
         else:
             self.network = conv_mlp_net(conv_in=INPUT_CH, conv_ch=FEATURE_CH, mlp_in=(edge_num+cloud_num)*FEATURE_CH,\
-                                    mlp_ch=MLP_CH, out_ch=edge_num, block_num=3)
+                                    mlp_ch=MLP_CH, out_ch=1, block_num=3)
         
     def load_model(self, filename):
         map_location=lambda storage, loc:storage
