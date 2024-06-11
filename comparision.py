@@ -130,7 +130,7 @@ class Critic(nn.Module):
 # Load các mô hình đã huấn luyện từ w00 đến w100
 trained_models = {}
 
-for wi in range(100, -1, -1):
+for wi in range(100, -1, -2):
     actor = Actor(is_gpu=is_gpu_default)
     critic = Critic(is_gpu=is_gpu_default)
     
@@ -144,8 +144,6 @@ for wi in range(100, -1, -1):
     else:
         # Thực hiện xử lý nếu file không tồn tại, ví dụ: thông báo hoặc pass
         pass
-# Tạo môi trường không huấn luyện với edge_num và cloud_num mong muốn
-untrained_env = SDN_Env(conf_name=config, w=0.5, fc=4e9, fe=2e9, edge_num=edge_num, cloud_num=cloud_num)
 
 # List to store solutions from all episodes for each wi
 train_wi_delay_solutions = []
@@ -160,6 +158,11 @@ for wi, (actor, critic) in trained_models.items():
     train_link_utilisation_solutions = []
     untrained_delay_solutions = []
     untrained_link_utilisation_solutions = []
+    
+    if(wi < 100):
+        # Tạo môi trường không huấn luyện với edge_num và cloud_num mong muốn
+        untrained_env = SDN_Env(conf_name=config, w=(wi+1) / 100.0, fc=4e9, fe=2e9, edge_num=edge_num, cloud_num=cloud_num)
+
     for _ in range(1):  # Number of episodes
         # For trained models
         obs = env.reset()
@@ -188,7 +191,7 @@ for wi, (actor, critic) in trained_models.items():
             action, _ = actor(torch.FloatTensor(obs))
             # print(action.detach().numpy())
             # Perform actions and observe next state and reward
-            next_obs, _, done, _ = env.step(action.detach().numpy())
+            next_obs, _, done, _ = untrained_env.step(action.detach().numpy())
             # Update current observation
             obs = next_obs
         delay, link_utilisation = untrained_env.estimate_performance()
