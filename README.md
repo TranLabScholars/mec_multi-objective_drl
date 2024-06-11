@@ -1,6 +1,6 @@
-## Multi-Objective Deep Reinforcement Learning for SDN Edge Computing (MEC-MORL)
+## Optimizing Edge-Cloud Server Selection: A Multi-Objective Deep Reinforcement Learning Approach
 
-This repository contains the Python code implementation for the paper titled "Multi-objective Deep Reinforcement Learning for SDN Edge Computing". The proposed approach aims to optimize task offloading decisions in Software-Defined Networking (SDN) Edge Computing environments using Multi-Objective Deep Reinforcement Learning (MORL).
+This repository contains the Python code implementation for the paper titled "Optimizing Edge-Cloud Server Selection: A Multi-Objective Deep Reinforcement Learning Approach". The proposed approach aims to optimize task offloading decisions in Software-Defined Networking (SDN) Edge Computing environments using Multi-Objective Deep Reinforcement Learning (MORL).
 
 ### Dependencies
 
