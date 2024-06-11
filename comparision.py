@@ -163,7 +163,7 @@ for wi, (actor, critic) in trained_models.items():
         # Tạo môi trường không huấn luyện với edge_num và cloud_num mong muốn
         untrained_env = SDN_Env(conf_name=config, w=(wi+1) / 100.0, fc=4e9, fe=2e9, edge_num=edge_num, cloud_num=cloud_num)
 
-    for _ in range(1):  # Number of episodes
+    for _ in range(1000):  # Number of episodes
         # For trained models
         obs = env.reset()
         done = False
